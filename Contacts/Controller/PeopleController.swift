@@ -36,6 +36,13 @@ class PeopleController: UIViewController {
         return button
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+        var activityView = UIActivityIndicatorView(style: .large)
+        activityView.hidesWhenStopped = true
+        activityView.isHidden = true
+        return activityView
+    }()
+    
     let randomizer = Randomizer() // Randomizer Class
     var tableIsEnabled = true
     var users: [User] = [] // Array of Ramdom Users
@@ -56,11 +63,13 @@ class PeopleController: UIViewController {
         dic.user = user
     }
 
-    
+    //MARK: Selector Function performing user randomization
     @objc func tapButton(_ sender: UIButton) {
+        sender.isEnabled = false
         randomizeUsers()
     }
     
+    //MARK: Selector Function performing table or grid representation of cells
     @objc func changeMenuView(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -74,6 +83,7 @@ class PeopleController: UIViewController {
         }
     }
     
+    //MARK: Setting the collection view
     private func setCollectionView() {
         collectionView.register(TableCell.self, forCellWithReuseIdentifier: "tableCell")
         collectionView.register(GridCell.self, forCellWithReuseIdentifier: "gridCell")
@@ -83,15 +93,21 @@ class PeopleController: UIViewController {
         animateMenu()
     }
     
+    //MARK: The method shows activity indicator during randomizing users array
     private func randomizeUsers() {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         randomizer.getRandomUsersArray { (users) in
             DispatchQueue.main.async {
+                self.button.isEnabled = true
+                self.activityIndicator.stopAnimating()
                 self.users = users
                 self.setCollectionView()
             }
         }
     }
     
+    //MARK: Sliding from left animation method
     private func animateMenu() {
         let window = UIApplication.shared.windows[0]
         
@@ -103,17 +119,24 @@ class PeopleController: UIViewController {
         collectionView.reloadData()
     }
     
+    //MARK: The method sets constraints and adds elements to portrait screen
     private func setupViews() {
         view.addSubview(segmentedControl)
-        view.addSubview(button)
         segmentedControl.height(30)
         segmentedControl.width(200)
         segmentedControl.centerXToSuperview()
         segmentedControl.edgesToSuperview(excluding: [.bottom, .left, .right], insets: .top(10),  usingSafeArea: true)
+        
+        view.addSubview(button)
         button.edgesToSuperview(excluding: [.top, .left, .right], insets: .bottom(10), usingSafeArea: true)
         button.height(30)
         button.width(170)
         button.centerXToSuperview()
+        
+        collectionView.addSubview(activityIndicator)
+        activityIndicator.center(in: collectionView)
+        activityIndicator.height(35)
+        activityIndicator.width(35)
     }
     
     @IBAction func unwindToPeopleController(_ unwindSegue: UIStoryboardSegue) {

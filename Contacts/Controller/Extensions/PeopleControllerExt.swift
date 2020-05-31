@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+//MARK: - CollectionView DataSource & Delegate + FlowLayoutDelegate methods
 extension PeopleController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return users.count

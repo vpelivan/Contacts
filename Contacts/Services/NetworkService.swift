@@ -20,15 +20,15 @@ class NetworkService {
     //MARK: - Next method performs image load request in case if it is not cached already, and if it is cached, it just pulls it from cache. It also handles right status codes and errors
     public func getImage(from url: URL, completion: @escaping (UIImage?)->()) {
         
-        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) { // Checking if an image is already cached
             completion(cachedImage)
-        } else {
+        } else { // if an image is not cached, we perform request
             var request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 10)
             request.httpMethod = "GET"
             URLSession.shared.dataTask(with: request) {
                 (data, response, error) in
                 guard let response = (response as? HTTPURLResponse), (200...299).contains(response.statusCode), error == nil, let data = data, let image = UIImage(data: data) else {
-                    print("Image Request Error")
+                    print("Image Request Error: ", error?.localizedDescription ?? "")
                     completion(nil)
                     return
                 }

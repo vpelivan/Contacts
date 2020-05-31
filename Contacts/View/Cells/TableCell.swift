@@ -55,7 +55,8 @@ class TableCell: UICollectionViewCell {
         return inset
     }()
     
-    func setupViews() {
+    //MARK: I decided to use VFL (Visual Formatting Language) to add constraints in this cell
+    private func setupViews() {
         addSubview(label)
         addSubview(imageView)
         addSubview(inset)
@@ -73,7 +74,6 @@ class TableCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-        backgroundColor = .white
         statusIndicator.isHidden = true
     }
     

@@ -40,7 +40,8 @@ class GridCell: UICollectionViewCell {
         return indicator
     }()
     
-    func setupViews() {
+    //MARK: I decided to use VFL (Visual Formatting Language) to add constraints in this cell
+    private func setupViews() {
         addSubview(imageView)
         imageView.addSubview(statusIndicator)
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0(<=48)]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0": imageView]))

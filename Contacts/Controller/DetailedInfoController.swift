@@ -21,11 +21,10 @@ class DetailedInfoController: UIViewController {
     }()
     
     let imageView: UIImageView = {
-        let image = UIImage(named: "default")
+        let image = UIImage()
         let imgView = UIImageView(image: image)
         let frame = CGRect(x: 0, y: 0, width: 500, height: 500)
         imgView.frame = frame
-        imgView.layer.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
         return imgView
     }()
     
@@ -35,7 +34,7 @@ class DetailedInfoController: UIViewController {
         label.textColor = .black
         label.textAlignment = .center
         label.text = "Name Label"
-        label.font = UIFont.systemFont(ofSize: 30)
+        label.font = UIFont.systemFont(ofSize: 25)
         return label
     }()
     
@@ -45,7 +44,7 @@ class DetailedInfoController: UIViewController {
         label.textColor = .black
         label.textAlignment = .center
         label.text = "Status Label"
-        label.font = UIFont.systemFont(ofSize: 25)
+        label.font = UIFont.systemFont(ofSize: 20)
         return label
     }()
     
@@ -55,8 +54,15 @@ class DetailedInfoController: UIViewController {
         label.textColor = .link
         label.textAlignment = .center
         label.text = "Email Label"
-        label.font = UIFont.systemFont(ofSize: 27)
+        label.font = UIFont.systemFont(ofSize: 22)
         return label
+    }()
+    
+    let activityIndicator: UIActivityIndicatorView = {
+        var activityView = UIActivityIndicatorView(style: .large)
+        activityView.hidesWhenStopped = true
+        activityView.isHidden = true
+        return activityView
     }()
     
     var user: User! // User Info passed using segue from People Controller
@@ -73,7 +79,7 @@ class DetailedInfoController: UIViewController {
         performSegue(withIdentifier: "unwindToPeopleController", sender: nil)
     }
     
-    //MARK: The method sets constraints and adds elements to screen
+    //MARK: The method sets constraints and adds elements to portrait screen
     private func setupViews() {
         view.addSubview(button)
         button.edgesToSuperview(excluding: [.bottom, .right], insets: .top(10) + .left(0), usingSafeArea: true)
@@ -81,36 +87,45 @@ class DetailedInfoController: UIViewController {
         button.width(100)
         
         view.addSubview(imageView)
-        imageView.centerInSuperview(offset: CGPoint(x: 0, y: -100), usingSafeArea: true)
-        imageView.height(300)
-        imageView.width(300)
+        imageView.centerInSuperview(offset: CGPoint(x: 0, y: -40), usingSafeArea: true)
+        imageView.height(270)
+        imageView.width(270)
+        
+        imageView.addSubview(activityIndicator)
+        activityIndicator.center(in: imageView)
+        activityIndicator.height(35)
+        activityIndicator.width(35)
         
         view.addSubview(nameLabel)
-        nameLabel.centerInSuperview(offset: CGPoint(x: 0, y: 80), usingSafeArea: true)
+        nameLabel.centerInSuperview(offset: CGPoint(x: 0, y: 120), usingSafeArea: true)
         nameLabel.height(35)
         nameLabel.width(300)
         
         view.addSubview(statusLabel)
-        statusLabel.centerInSuperview(offset: CGPoint(x: 0, y: 120), usingSafeArea: true)
+        statusLabel.centerInSuperview(offset: CGPoint(x: 0, y: 147), usingSafeArea: true)
         statusLabel.height(20)
         statusLabel.width(100)
         
         view.addSubview(emailLabel)
-        emailLabel.centerInSuperview(offset: CGPoint(x: 0, y: 160), usingSafeArea: true)
+        emailLabel.centerInSuperview(offset: CGPoint(x: 0, y: 170), usingSafeArea: true)
         emailLabel.height(30)
         emailLabel.width(350)
+        
     }
     
     //MARK: This Method performs bigger size image request and fetches all user data
     private func fetchData() {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         guard let emailHash = user.emailHash, let url = URL(string: "https://www.gravatar.com/avatar/\(emailHash)?s=500") else { return }
         request.getImage(from: url) { (image) in
             DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
                 self.imageView.image = image
             }
         }
         nameLabel.text = user.name
-        statusLabel.text = user.status ? "offline" : "online"
+        statusLabel.text = user.status ? "offine" : "online"
         emailLabel.text = user.nickName + user.emailServer
     }
 }
