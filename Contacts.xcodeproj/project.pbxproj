@@ -14,11 +14,11 @@
 		570E54F4247D3A4500C4890D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 570E54F3247D3A4500C4890D /* Assets.xcassets */; };
 		570E54F7247D3A4500C4890D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 570E54F5247D3A4500C4890D /* LaunchScreen.storyboard */; };
 		570E54FF247D3B7000C4890D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570E54FE247D3B7000C4890D /* NetworkService.swift */; };
+		572449862484112D00630600 /* PeopleControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572449852484112D00630600 /* PeopleControllerExt.swift */; };
 		5794EDB024819FA6004AE097 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5794EDAF24819FA6004AE097 /* GridCell.swift */; };
 		5794EDB92481A78C004AE097 /* DetailedInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5794EDB82481A78C004AE097 /* DetailedInfoController.swift */; };
 		57EE7301247E934700163F36 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EE7300247E934700163F36 /* DataModel.swift */; };
 		57EE7303247E9C4700163F36 /* Randomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EE7302247E9C4700163F36 /* Randomizer.swift */; };
-		57EE7305247F192B00163F36 /* MenuInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EE7304247F192B00163F36 /* MenuInterface.swift */; };
 		57EE7307247F23F200163F36 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EE7306247F23F200163F36 /* TableCell.swift */; };
 		81EBA3C165F066A32CA5277C /* Pods_Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BF02B925AE20F30A00A1188 /* Pods_Contacts.framework */; };
 /* End PBXBuildFile section */
@@ -33,11 +33,11 @@
 		570E54F6247D3A4500C4890D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		570E54F8247D3A4500C4890D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		570E54FE247D3B7000C4890D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		572449852484112D00630600 /* PeopleControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleControllerExt.swift; sourceTree = "<group>"; };
 		5794EDAF24819FA6004AE097 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		5794EDB82481A78C004AE097 /* DetailedInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInfoController.swift; sourceTree = "<group>"; };
 		57EE7300247E934700163F36 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		57EE7302247E9C4700163F36 /* Randomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomizer.swift; sourceTree = "<group>"; };
-		57EE7304247F192B00163F36 /* MenuInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInterface.swift; sourceTree = "<group>"; };
 		57EE7306247F23F200163F36 /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
 		7BF02B925AE20F30A00A1188 /* Pods_Contacts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Contacts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B0B4989E010FA0C128B2CA /* Pods-Contacts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contacts.debug.xcconfig"; path = "Target Support Files/Pods-Contacts/Pods-Contacts.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +86,14 @@
 			path = Contacts;
 			sourceTree = "<group>";
 		};
+		572449872484113300630600 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				572449852484112D00630600 /* PeopleControllerExt.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5794EDB12481A51A004AE097 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +108,7 @@
 			children = (
 				570E54EE247D3A4400C4890D /* PeopleController.swift */,
 				5794EDB82481A78C004AE097 /* DetailedInfoController.swift */,
+				572449872484113300630600 /* Extensions */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -144,7 +153,6 @@
 		5794EDB72481A6F4004AE097 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				57EE7304247F192B00163F36 /* MenuInterface.swift */,
 				570E54FE247D3B7000C4890D /* NetworkService.swift */,
 				57EE7302247E9C4700163F36 /* Randomizer.swift */,
 			);
@@ -287,8 +295,8 @@
 				570E54EF247D3A4400C4890D /* PeopleController.swift in Sources */,
 				57EE7307247F23F200163F36 /* TableCell.swift in Sources */,
 				570E54EB247D3A4400C4890D /* AppDelegate.swift in Sources */,
-				57EE7305247F192B00163F36 /* MenuInterface.swift in Sources */,
 				5794EDB92481A78C004AE097 /* DetailedInfoController.swift in Sources */,
+				572449862484112D00630600 /* PeopleControllerExt.swift in Sources */,
 				5794EDB024819FA6004AE097 /* GridCell.swift in Sources */,
 				570E54FF247D3B7000C4890D /* NetworkService.swift in Sources */,
 				57EE7303247E9C4700163F36 /* Randomizer.swift in Sources */,
